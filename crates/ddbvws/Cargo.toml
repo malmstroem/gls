@@ -1,0 +1,18 @@
+[package]
+name = "ddbvws"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+iwf = { path = "../../../iwf" , features = ["postgres"]}
+serde = { version = "1.0.215", features = ["derive"] }
+serde_derive = "1.0.215"
+serde_json = "1.0.133"
+sqlx = "0.7.4"
+modql = "0.3.10"
+sea-query = "0.30.7"
+tabled = "0.15.0"
+
+[features]
+postgres = []
+default = ["postgres"]

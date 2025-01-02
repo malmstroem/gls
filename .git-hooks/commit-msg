@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import sys
+from subprocess import check_output
+from pathlib import Path
+
+# Collect the parameters
+commit_msg_filepath = sys.argv[1]
+
+# Figure out which branch we're on
+branch = check_output(["git", "symbolic-ref", "--short", "HEAD"]).strip()
+print(f"commit-msg: On branch '{branch}'")
+
+# Check the commit message if we're on an issue branch
+with Path(commit_msg_filepath).open("r") as f:
+    content = f.read()
+    if content.startswith("Bump"):
+        sys.exit(0)
+    commit_type = content.split(":")[0]
+    if commit_type in [
+        "fix",
+        "feat",
+        "build",
+        "chore",
+        "ci",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+    ]:  # all good
+        sys.exit(0)
+    print(f"commit-type not recognized: {commit_type}")
+    print(f"Content: {content}")
+sys.exit(1)

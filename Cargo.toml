@@ -1,0 +1,11 @@
+[workspace]
+resolver="2"
+members = [ "crates/ddbtbl",
+    "crates/gls",
+    "crates/ddbtbl",
+    "crates/ddbstp",
+    "crates/ddbtsk",
+    "crates/ddbvws",
+    "crates/ddbot",
+]
+
